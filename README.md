@@ -47,7 +47,7 @@ flowchart LR
 ```
 
 ### Fee math (short)
-`sharePrice = (assets+1) * 1e27 * / (supply + 1e6)`. If `price > hwm`: `excess = assets * (price-hwm)/price`, `feeAssets = excess * feeBps/1e4`, `feeShares = feeAssets * (supply+1e6) / (assets - feeAssets + 1)` (rounded down, i.e. in favour of holders). A loss followed by recovery to the old price pays no fee because `hwm` never decreases.
+`sharePrice = (assets+1) * 1e27 / (supply + 1e6) * 1e6`. If `price > hwm`: `excess = assets * (price-hwm)/price`, `feeAssets = excess * feeBps/1e4`, `feeShares = feeAssets * (supply+1e6) / (assets - feeAssets + 1)` (rounded down, i.e. in favour of holders). A loss followed by recovery to the old price pays no fee because `hwm` never decreases.
 
 ### Inflation / donation attack
 Classic attack: attacker deposits 1 wei, donates a big amount straight to the vault so the share price explodes, and the next depositor's shares round to 0. Here the 1e6 virtual shares mean the attacker's donation is mostly captured by the virtual position, so the attack loses money.
